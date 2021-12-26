@@ -21,11 +21,11 @@ contract Lottery {
         return uint(keccak256(block.difficulty, block.timestamp, players));
     }
 
-    //picks a random winner and trasfers prize money
+    //picks a random winner and transfers prize money
     function pickWinner() public  {
         uint index = random() % players.length;
         players[index].transfer(this.balance);
-        
+        players = new address[](0);
     }
 }
     
