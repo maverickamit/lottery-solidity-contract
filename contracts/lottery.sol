@@ -21,8 +21,14 @@ contract Lottery {
         return uint(keccak256(block.difficulty, block.timestamp, players));
     }
 
+    //Only manager can access
+    modifier restricted (){
+        require(msg.sender == manager);
+        _;
+    }
+
     //picks a random winner and transfers prize money
-    function pickWinner() public  {
+    function pickWinner() public restricted {
         uint index = random() % players.length;
         players[index].transfer(this.balance);
         players = new address[](0);
