@@ -15,6 +15,11 @@ contract Lottery {
         require(msg.value >= 0.01 ether);
         players.push(msg.sender);
     }
+
+    //pseudo random number generator
+    function random() public view returns (uint) {
+        return uint(keccak256(block.difficulty, block.timestamp, players));
+    }
 }
     
 }
