@@ -17,7 +17,7 @@ contract Lottery {
     }
 
     //pseudo random number generator
-    function random() public view returns (uint) {
+    function random() private view returns (uint) {
         return uint(keccak256(block.difficulty, block.timestamp, players));
     }
 
