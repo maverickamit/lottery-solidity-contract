@@ -20,6 +20,13 @@ contract Lottery {
     function random() public view returns (uint) {
         return uint(keccak256(block.difficulty, block.timestamp, players));
     }
+
+    //picks a random winner and trasfers prize money
+    function pickWinner() public  {
+        uint index = random() % players.length;
+        players[index].transfer(this.balance);
+        
+    }
 }
     
 }
