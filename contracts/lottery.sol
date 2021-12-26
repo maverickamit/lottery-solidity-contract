@@ -33,6 +33,11 @@ contract Lottery {
         players[index].transfer(this.balance);
         players = new address[](0);
     }
+
+    //get the list of players
+    function getPlayers() public view returns(address[]) {
+        return players;
+    }
 }
     
 }
