@@ -1,4 +1,4 @@
-const { strictEqual } = require("assert");
+const { strictEqual, doesNotMatch } = require("assert");
 const assert = require("assert");
 const ganache = require("ganache-cli");
 const Web3 = require("web3");
@@ -57,5 +57,19 @@ describe("Lottery Contract", () => {
     strictEqual(accounts[1], players[1]);
     strictEqual(accounts[2], players[2]);
     strictEqual(3, players.length);
+  });
+
+  it("restricts from entering with less than minimum amount of ether", async () => {
+    try {
+      await lottery.methods.enter().send({
+        from: accounts[0],
+        value: web3.utils.toWei("1", "ether"),
+      });
+      //   If enter transaction is successful with less than minimum balance, new error is thrown.
+      //   But this error object doesn't have same structure as the error object from transaction failure.
+      throw new Error();
+    } catch (error) {
+      assert(error.results);
+    }
   });
 });
