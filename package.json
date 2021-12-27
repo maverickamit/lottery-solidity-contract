@@ -10,6 +10,11 @@
   },
   "description": "",
   "dependencies": {
-    "solc": "^0.4.17"
+    "@truffle/hdwallet-provider": "^2.0.0",
+    "dotenv": "^10.0.0",
+    "ganache-cli": "^6.12.2",
+    "mocha": "^9.1.3",
+    "solc": "^0.4.17",
+    "web3": "^1.6.1"
   }
 }
