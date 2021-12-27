@@ -63,10 +63,25 @@ describe("Lottery Contract", () => {
     try {
       await lottery.methods.enter().send({
         from: accounts[0],
-        value: web3.utils.toWei("1", "ether"),
+        value: web3.utils.toWei("0", "ether"),
       });
       //   If enter transaction is successful with less than minimum balance, new error is thrown.
       //   But this error object doesn't have same structure as the error object from transaction failure.
+      throw new Error();
+    } catch (error) {
+      assert(error.results);
+    }
+  });
+
+  it("restricts anyone else other than manager to access pickWinner", async () => {
+    try {
+      await lottery.methods.enter().send({
+        from: accounts[0],
+        value: web3.utils.toWei("0.02", "ether"),
+      });
+      await lottery.methods.pickWinner().send({
+        from: accounts[1],
+      });
       throw new Error();
     } catch (error) {
       assert(error.results);
