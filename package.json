@@ -2,7 +2,9 @@
   "name": "lottery",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha"
+  },
   "author": "",
   "license": "ISC",
   "directories": {
